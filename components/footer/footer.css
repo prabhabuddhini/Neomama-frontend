@@ -1,0 +1,61 @@
+/* ===== FOOTER MAIN ===== */
+.footer{
+    background:#2c7da0; /* same as navbar */
+    color:white;
+    padding:45px 0;
+    margin-top:0px;
+    box-shadow:0 -4px 15px rgba(0,0,0,0.1);
+}
+
+/* footer titles */
+.footer h5,
+.footer h6{
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+/* footer text */
+.footer p{
+    margin:4px 0;
+    font-size:14px;
+    opacity:0.95;
+}
+
+/* ===== FOOTER LINKS ===== */
+.footer a{
+    color:white;
+    text-decoration:none;
+    position:relative;
+    transition:0.3s;
+}
+
+/* underline animation (same as navbar) */
+.footer a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    left:0;
+    bottom:-3px;
+    background:white;
+    transition:0.3s ease-in-out;
+}
+
+/* hover animation */
+.footer a:hover::after{
+    width:100%;
+}
+
+.footer a:hover{
+    color:#e6f2f5;
+}
+
+/* bottom copyright line */
+.footer .copyright{
+    margin-top:25px;
+    border-top:0.5px solid rgba(255,255,255,0.2);
+    padding-top:15px;
+    font-size:13px;
+    text-align:center;
+    opacity:0.9;
+}

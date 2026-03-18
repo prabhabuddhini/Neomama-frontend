@@ -1,0 +1,139 @@
+/* ===== NAVBAR MAIN ===== */
+/* ===== NAVBAR MAIN ===== */
+.custom-navbar{
+    background:#2c7da0; /* medical blue */
+    padding:18px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* LOGO */
+.navbar-brand{
+    font-weight:700;
+    font-size:22px;
+    color:white !important;
+}
+
+/* NAV LINKS */
+.nav-link{
+    color:white !important;
+    font-weight:500;
+    margin:0 14px;
+    font-size:15px;
+    transition:0.3s;
+    white-space:nowrap;
+}
+
+/* hover effect */
+.nav-link:hover{
+    color:#e6f2f5 !important;
+    text-decoration:underline;
+    transform:translateY(-2px);
+}
+
+/* active page highlight */
+.nav-link.active{
+    border-bottom:2px solid white;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+    background:white;
+    color:#2c7da0;
+    border-radius:25px;
+    padding:8px 18px;
+    font-weight:500;
+    border:none;
+    transition:0.3s;
+    width:auto;
+    min-width:92px;
+    text-align:center;
+    flex:0 0 auto;
+}
+
+.login-btn:hover{
+    background:#e6f2f5;
+    transform:scale(1.05);
+}
+
+.navbar-account{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex:0 0 auto;
+}
+
+.dashboard-btn{
+    background:white;
+    color:#2c7da0;
+    border-radius:25px;
+    padding:8px 18px;
+    font-weight:600;
+    border:none;
+    line-height:1.2;
+    transition:0.3s;
+    white-space:nowrap;
+}
+
+.dashboard-btn:hover{
+    background:#e6f2f5;
+    color:#1b4965;
+    transform:translateY(-2px);
+}
+
+.navbar-profile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    padding:4px 8px 4px 4px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.12);
+    transition:0.3s;
+    max-width:170px;
+}
+
+.navbar-profile:hover{
+    color:white;
+    background:rgba(255,255,255,0.2);
+    transform:translateY(-2px);
+}
+
+.navbar-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffffff;
+    color:#2c7da0;
+    font-size:13px;
+    font-weight:700;
+    flex:0 0 auto;
+    overflow:hidden;
+}
+
+.navbar-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.navbar-name{
+    max-width:150px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:14px;
+}
+
+@media(max-width:991px){
+    .navbar-account{
+        margin-top:12px;
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}

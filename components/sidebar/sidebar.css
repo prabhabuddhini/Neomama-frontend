@@ -1,0 +1,107 @@
+/* ===== SIDEBAR MAIN ===== */
+.sidebar{
+    width:220px;
+    background:#1b4965;
+    color:white;
+    min-height:100vh;
+    box-sizing:border-box;
+    padding:20px;
+    position:fixed;
+    left:0;
+    top:0;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.sidebar-header h3{
+    margin:0;
+    font-weight:600;
+    margin-bottom:25px;
+}
+
+/* MENU */
+.sidebar-menu{
+    list-style:none;
+    padding:0;
+    margin-top:20px;
+    margin-bottom:24px;
+}
+
+.sidebar-menu li{
+    padding:12px 15px;
+    border-radius:8px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:14px;
+}
+
+/* hover */
+.sidebar-menu li:hover{
+    background:#2c7da0;
+}
+
+/* active */
+.sidebar-menu li.active{
+    background:#2c7da0;
+    font-weight:600;
+}
+
+/* .. sidebar link style fix */
+.sidebar-menu li a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    width:100%;
+}
+
+/* hover when link inside */
+.sidebar-menu li:hover a{
+    color:white;
+}
+
+/* active link */
+.sidebar-menu li.active a{
+    color:white;
+    font-weight:600;
+}
+
+.sidebar-footer{
+    margin-top:auto;
+    padding-top:16px;
+}
+
+.sidebar-logout-btn{
+    width:100%;
+    min-height:44px;
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:10px;
+    background:#e63946;
+    color:white;
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(0,0,0,0.16);
+    transition:background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sidebar-logout-btn:hover{
+    background:#d62839;
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(0,0,0,0.22);
+}
+
+.sidebar-logout-btn:focus-visible{
+    outline:3px solid rgba(214,238,247,0.72);
+    outline-offset:3px;
+}
+
+.sidebar{
+    width:240px;
+  }
+  
+  .main-content{
+    margin-left:240px;
+  }
