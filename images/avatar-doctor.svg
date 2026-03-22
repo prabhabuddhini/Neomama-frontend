@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c7da0"/>
+      <stop offset="100%" style="stop-color:#1b4965"/>
+    </linearGradient>
+    <clipPath id="circle">
+      <circle cx="50" cy="50" r="50"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="50" fill="url(#bg)"/>
+
+  <!-- Head -->
+  <circle cx="50" cy="36" r="14" fill="rgba(255,255,255,0.92)"/>
+
+  <!-- Shoulders / body -->
+  <path d="M18 90 Q18 65 50 65 Q82 65 82 90 Z" fill="rgba(255,255,255,0.92)"/>
+
+  <!-- Stethoscope arc -->
+  <path d="M40 60 Q34 70 38 76" stroke="rgba(255,255,255,0.55)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M60 60 Q66 70 62 76" stroke="rgba(255,255,255,0.55)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M38 76 Q50 82 62 76" stroke="rgba(255,255,255,0.55)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <circle cx="50" cy="82" r="3.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+</svg>

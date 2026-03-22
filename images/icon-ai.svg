@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b68ee"/>
+      <stop offset="100%" style="stop-color:#4a3fbf"/>
+    </linearGradient>
+  </defs>
+  <rect width="56" height="56" rx="14" fill="url(#g)"/>
+  <!-- Brain outline -->
+  <path d="M28 12 C20 12 14 18 14 25 C14 30 17 34 22 36 L22 44 L34 44 L34 36 C39 34 42 30 42 25 C42 18 36 12 28 12 Z"
+    fill="white" opacity="0.88"/>
+  <!-- Neural dots -->
+  <circle cx="22" cy="22" r="2" fill="#7b68ee"/>
+  <circle cx="28" cy="20" r="2" fill="#7b68ee"/>
+  <circle cx="34" cy="22" r="2" fill="#7b68ee"/>
+  <circle cx="25" cy="28" r="2" fill="#7b68ee"/>
+  <circle cx="31" cy="28" r="2" fill="#7b68ee"/>
+  <!-- Connection lines -->
+  <line x1="22" y1="22" x2="28" y2="20" stroke="#7b68ee" stroke-width="1.2"/>
+  <line x1="28" y1="20" x2="34" y2="22" stroke="#7b68ee" stroke-width="1.2"/>
+  <line x1="22" y1="22" x2="25" y2="28" stroke="#7b68ee" stroke-width="1.2"/>
+  <line x1="34" y1="22" x2="31" y2="28" stroke="#7b68ee" stroke-width="1.2"/>
+  <line x1="25" y1="28" x2="31" y2="28" stroke="#7b68ee" stroke-width="1.2"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43aa8b"/>
+      <stop offset="100%" style="stop-color:#2d7a63"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#g)"/>
+  <!-- Baby head -->
+  <circle cx="24" cy="18" r="8" fill="white" opacity="0.92"/>
+  <!-- Swaddle body -->
+  <ellipse cx="24" cy="34" rx="10" ry="8" fill="white" opacity="0.92"/>
+  <!-- Tiny face features -->
+  <circle cx="21.5" cy="17.5" r="1.2" fill="#43aa8b" opacity="0.7"/>
+  <circle cx="26.5" cy="17.5" r="1.2" fill="#43aa8b" opacity="0.7"/>
+  <path d="M22 21 Q24 23 26 21" stroke="#43aa8b" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+</svg>
