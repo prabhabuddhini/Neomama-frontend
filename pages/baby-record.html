@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Baby Record | NeoMama</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/baby-record.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <!-- Page header -->
+        <div class="page-header-bar">
+            <div>
+                <h2>Add Baby Record</h2>
+                <p>Register a newborn and link to the mother's pregnancy profile</p>
+            </div>
+            <div class="header-icon">+</div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-container">
+            <form id="babyForm">
+
+                <!-- SECTION: Mother Information -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon mother">M</div>
+                        <h3>Mother Information</h3>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Mother Name</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="motherName" placeholder="Type to search patient..." required autocomplete="off">
+                                <ul class="autocomplete-list" id="autocompleteList"></ul>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Patient ID</label>
+                            <input type="text" id="patientId" readonly placeholder="Auto-filled on selection">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: Baby Details -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon baby">B</div>
+                        <h3>Baby Details</h3>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Baby Name</label>
+                            <input type="text" id="babyName" placeholder="Enter baby name" required>
+                        </div>
+                        <div class="field">
+                            <label>Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Birth Date</label>
+                            <input type="date" id="birthDate" required>
+                        </div>
+                        <div class="field">
+                            <label>Baby Age</label>
+                            <input type="text" id="babyAge" readonly placeholder="Auto calculated">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: Birth Measurements -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon measure">W</div>
+                        <h3>Birth Measurements</h3>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Birth Weight (kg)</label>
+                            <input type="number" id="weight" step="0.1" placeholder="e.g. 3.2">
+                        </div>
+                        <div class="field">
+                            <label>Birth Height (cm)</label>
+                            <input type="number" id="height" placeholder="e.g. 50">
+                        </div>
+                        <div class="field">
+                            <label>Head Circumference (cm)</label>
+                            <input type="number" id="headCircumference" placeholder="e.g. 35">
+                        </div>
+                        <div class="field">
+                            <label>Blood Group</label>
+                            <select id="bloodGroup">
+                                <option value="">Select Blood Group</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: Delivery Information -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon delivery">D</div>
+                        <h3>Delivery Information</h3>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Delivery Type</label>
+                            <select id="deliveryType">
+                                <option value="">Select Delivery Type</option>
+                                <option>Normal Delivery</option>
+                                <option>Cesarean Section</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Birth Status</label>
+                            <select id="birthStatus">
+                                <option value="">Select Status</option>
+                                <option>Healthy</option>
+                                <option>Premature</option>
+                                <option>NICU Admission</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Apgar Score (1 min)</label>
+                            <input type="number" id="apgar1" min="0" max="10" placeholder="0 - 10">
+                        </div>
+                        <div class="field">
+                            <label>Apgar Score (5 min)</label>
+                            <input type="number" id="apgar5" min="0" max="10" placeholder="0 - 10">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: Additional -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon extra">N</div>
+                        <h3>Additional Information</h3>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>BCG Vaccine Given</label>
+                            <select id="bcgVaccine">
+                                <option value="">Select</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Clinic</label>
+                            <input type="text" id="clinic" placeholder="e.g. Colombo Clinic">
+                        </div>
+                    </div>
+                    <div class="field-grid single" style="margin-top: 18px;">
+                        <div class="field">
+                            <label>Doctor Notes</label>
+                            <textarea id="doctorNotes" rows="4" placeholder="Add clinical observations and notes..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="form-section" style="border: none; box-shadow: none; background: transparent; padding: 0;">
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save Baby Record</button>
+                        <button type="button" class="btn-cancel">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/baby-record.js"></script>
+    <script src="../js/components-loader.js"></script>
+
+</body>
+</html>

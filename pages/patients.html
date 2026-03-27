@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NeoMama | Maternal Patient Management</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/patients.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <div id="sidebar"></div>
+
+        <div class="main-content">
+
+    <section class="patients-page">
+        <div class="container">
+
+            <!-- Header -->
+            <!-- Page header -->
+            <div class="page-header">
+
+                <div class="header-left">
+                    <h2>Maternal Patient Management</h2>
+
+                    <p>
+                        Manage pregnancy records, monitor health, and track maternal progress.
+                    </p>
+
+                    <button class="btn-primary register-btn" onclick="openForm()">
+                        + Register New Mother
+                    </button>
+                </div>
+
+                <!-- right side professional image -->
+                <div class="header-right">
+                    <img src="../images/doctorm.jpg" alt="doctor" class="header-photo">
+                </div>
+
+            </div>
+
+            <!-- Summary -->
+            <div class="summary-cards">
+
+                <div class="card">
+                    <h4>Total Mothers</h4>
+                    <p id="totalMothers">0</p>
+                </div>
+
+                <div class="card risk">
+                    <h4>High Risk Cases</h4>
+                    <p id="highRisk">0</p>
+                </div>
+
+                <div class="card">
+                    <h4>This Month Visits</h4>
+                    <p id="monthlyVisits">0</p>
+                </div>
+
+                <div class="card">
+                    <h4>Expected Deliveries</h4>
+                    <p id="deliveries">0</p>
+                </div>
+
+            </div>
+
+            <!-- Search -->
+            <div class="search-bar">
+
+                <input id="searchInput" type="text" placeholder="Search by name...">
+
+                <select id="riskFilter">
+                  <option value="all">All Patients</option>
+                  <option value="high">High Risk</option>
+                  <option value="medium">Medium</option>
+                  <option value="normal">Normal</option>
+                </select>
+
+                <select id="trimesterFilter">
+                    <option value="all">All Trimester</option>
+                    <option value="1">1st Trimester</option>
+                    <option value="2">2nd Trimester</option>
+                    <option value="3">3rd Trimester</option>
+                </select>
+
+                <button class="btn-search" onclick="filterPatients()">Search</button>
+
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Mother Name</th>
+                            <th>Phone</th>
+                            <th>Age</th>
+                            <th>Weeks</th>
+                            <th>Weight</th>
+                            <th>Blood</th>
+                            <th>BP</th>
+                            <th>Risk</th>
+                            <th>Last Visit</th>
+                            <th>Doctor</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="patientTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Register mother modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Register New Mother</h3>
+                <span class="close" onclick="closeForm()">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <!-- Profile picture upload -->
+                <div class="profile-upload-section">
+                    <img id="motherProfilePreview" src="../images/avatar-mother.png" alt="Profile Preview" class="mother-avatar-preview">
+                    <input type="file" id="motherProfileImageInput" accept="image/*" hidden>
+                    <label for="motherProfileImageInput" class="btn-secondary">Upload Photo</label>
+                </div>
+
+                <div class="form-grid">
+                    <!-- Basic info -->
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" placeholder="Full Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="age" placeholder="Age">
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="phone" placeholder="Phone Number">
+                    </div>
+                    <div class="input-group">
+                        <label>Address</label>
+                        <input type="text" id="address" placeholder="Address">
+                    </div>
+
+                    <!-- Pregnancy info -->
+                    <div class="input-group">
+                        <label>Weeks Pregnant</label>
+                        <input type="number" id="weeks" placeholder="Weeks Pregnant">
+                    </div>
+                    <div class="input-group">
+                        <label>Blood Pressure</label>
+                        <input type="text" id="bp" placeholder="120/80">
+                    </div>
+                    <div class="input-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="Weight (kg)">
+                    </div>
+                    <div class="input-group">
+                        <label>Blood Group</label>
+                        <input type="text" id="bloodGroup" placeholder="Blood Group">
+                    </div>
+
+                    <!-- Medical -->
+                    <div class="input-group">
+                        <label>First Pregnancy?</label>
+                        <select id="pregnancy">
+                            <option>First Pregnancy?</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Medical Conditions</label>
+                        <input type="text" id="conditions" placeholder="Medical Conditions (if any)">
+                    </div>
+
+                    <!-- Doctor -->
+                    <div class="input-group">
+                        <label>Doctor Name</label>
+                        <input type="text" id="doctor" placeholder="Doctor Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Registration Date</label>
+                        <input type="date" id="date">
+                    </div>
+                </div>
+                <div class="form-section-title">Emergency Contact</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Contact Name</label>
+                        <input type="text" id="emgName" placeholder="Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Phone</label>
+                        <input type="text" id="emgPhone" placeholder="Phone Number">
+                    </div>
+                </div>
+
+                <div class="form-section-title">Medical History Details</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Diabetes</label>
+                        <select id="diabetes">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Hypertension</label>
+                        <select id="hypertension">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Allergies</label>
+                        <input type="text" id="allergies" placeholder="None">
+                    </div>
+                    <div class="input-group">
+                        <label>Complications</label>
+                        <input type="text" id="complications" placeholder="No">
+                    </div>
+                </div>
+
+                <div class="form-section-title">📱 Mobile App Credentials</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="patUsername" placeholder="e.g. amna.2026">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <input type="text" id="patPassword" placeholder="Min 6 characters" style="flex:1;">
+                            <button type="button" class="btn-secondary" onclick="autoGeneratePassword()" style="white-space:nowrap; padding:8px 12px; font-size:12px;">Auto-Generate</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" onclick="closeForm()" class="btn-secondary">Cancel</button>
+                <button type="button" onclick="addPatient()" class="btn-primary">Save Patient</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content profile-modal-content">
+            <div class="modal-header">
+                <h3>Patient Profile</h3>
+                <span class="close" onclick="closeProfileModal()">&times;</span>
+            </div>
+
+            <div class="modal-body profile-modal-body">
+                <div class="profile-header-card">
+                    <img id="modalPatientPhoto" src="../images/avatar-mother.png" alt="Patient Photo">
+                    <div class="profile-header-info">
+                        <h4 id="modalPatientName">Loading...</h4>
+                        <p id="modalPatientId">Patient ID: -</p>
+                        <span id="modalRiskBadge" class="badge normal">Normal</span>
+                    </div>
+                </div>
+
+                <div class="profile-details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Age</span>
+                        <span class="detail-value" id="modalAge">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Phone</span>
+                        <span class="detail-value" id="modalPhone">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Blood Group</span>
+                        <span class="detail-value" id="modalBlood">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Weeks Pregnant</span>
+                        <span class="detail-value" id="modalWeeks">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Weight</span>
+                        <span class="detail-value" id="modalWeight">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Blood Pressure</span>
+                        <span class="detail-value" id="modalBP">-</span>
+                    </div>
+                </div>
+                
+                <div class="profile-details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Sugar Level</span>
+                        <span class="detail-value" id="modalSugar">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Hemoglobin</span>
+                        <span class="detail-value" id="modalHb">-</span>
+                    </div>
+                    <div class="detail-item" style="grid-column: span 1;">
+                        <span class="detail-label">Emergency Contact</span>
+                        <span class="detail-value" id="modalEmergency" style="font-size:13px">-</span>
+                    </div>
+                </div>
+
+                <div class="medical-history-section">
+                    <h4>Medical History</h4>
+                    <div class="history-grid">
+                        <div class="history-item">
+                            <span class="history-label">Diabetes</span>
+                            <span class="history-value" id="modalDiabetes">-</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-label">Hypertension</span>
+                            <span class="history-value" id="modalHypertension">-</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-label">Allergies</span>
+                            <span class="history-value" id="modalAllergies">-</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-label">Complications</span>
+                            <span class="history-value" id="modalComplications">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medical-history-section">
+                    <h4>📱 Mobile App Credentials</h4>
+                    <div class="history-grid">
+                        <div class="history-item">
+                            <span class="history-label">Username</span>
+                            <span class="history-value" id="modalUsername">-</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-label">Status</span>
+                            <span class="history-value" id="modalLoginStatus">-</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <button type="button" class="btn-secondary" id="resetPatPasswordBtn" style="font-size:12px; padding:6px 14px;">🔑 Reset Password</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-primary" id="goToPregnancyBtn" onclick="">View Full Record</button>
+                <button type="button" onclick="closeProfileModal()" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success popup -->
+    <div id="successPopup" class="success-popup">
+        Mother Registered Successfully .
+    </div>
+
+
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/patients.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../js/components-loader.js"></script>
+    </div> <!-- END dashboard-layout -->
+</body>
+
+</html>

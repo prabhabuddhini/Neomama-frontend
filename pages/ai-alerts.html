@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoMama | AI Alerts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/ai-alerts.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard">
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        <!-- Page header -->
+        <div class="page-header-bar">
+            <div>
+                <h2>AI Alerts Dashboard</h2>
+                <p>Real-time clinical risk detection powered by rule-based analysis and AI recommendations</p>
+            </div>
+            <div class="header-actions">
+                <span class="ai-status" id="aiStatusBadge">Checking AI...</span>
+                <button class="btn-export" id="exportAlertsBtn">Export CSV</button>
+            </div>
+        </div>
+
+        <!-- Kpi cards -->
+        <div class="kpi-row">
+            <div class="kpi-card total"><span class="kpi-value" id="totalAlertsCount">0</span><span class="kpi-label">Total Alerts</span></div>
+            <div class="kpi-card critical"><span class="kpi-value" id="criticalAlertsCount">0</span><span class="kpi-label">Critical</span></div>
+            <div class="kpi-card moderate"><span class="kpi-value" id="moderateAlertsCount">0</span><span class="kpi-label">Moderate</span></div>
+            <div class="kpi-card resolved"><span class="kpi-value" id="resolvedAlertsCount">0</span><span class="kpi-label">Low / Resolved</span></div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-bar">
+            <input type="text" id="alertSearch" class="filter-input" placeholder="Search by patient name...">
+            <select id="alertTypeFilter" class="filter-select">
+                <option value="all">All Types</option>
+                <option value="high blood pressure">High Blood Pressure</option>
+                <option value="severe anemia risk">Severe Anemia</option>
+                <option value="diabetes risk">Diabetes Risk</option>
+                <option value="high-risk pregnancy">High-Risk Pregnancy</option>
+                <option value="missed antenatal visit">Missed Visit</option>
+                <option value="underweight baby">Underweight Baby</option>
+                <option value="abnormal weight gain">Abnormal Weight</option>
+            </select>
+            <select id="severityFilter" class="filter-select">
+                <option value="all">All Severity</option>
+                <option value="critical">Critical</option>
+                <option value="moderate">Moderate</option>
+                <option value="low">Low</option>
+            </select>
+            <select id="statusFilter" class="filter-select">
+                <option value="all">All Status</option>
+                <option value="new">New</option>
+                <option value="pending review">Pending Review</option>
+                <option value="under monitoring">Under Monitoring</option>
+                <option value="escalated">Escalated</option>
+            </select>
+        </div>
+
+        <!-- Critical alerts -->
+        <div class="card" id="criticalSection">
+            <div class="section-header"><div class="section-icon red">C</div><h4>Critical Alerts</h4><span class="critical-tag">Immediate Attention Required</span></div>
+            <div class="critical-grid" id="criticalAlertsWrap"></div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-row">
+            <div class="chart-card">
+                <div class="chart-header"><div class="chart-icon red">S</div><h4>Severity Breakdown</h4></div>
+                <canvas id="severityChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header"><div class="chart-icon blue">T</div><h4>Alert Type Distribution</h4></div>
+                <canvas id="typeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Alerts table -->
+        <div class="card">
+            <div class="section-header"><div class="section-icon blue">A</div><h4>All Alerts</h4></div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead><tr><th>ID</th><th>Patient</th><th>Type</th><th>Severity</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+                    <tbody id="alertsTableBody"><tr><td colspan="7" class="empty-state">Loading alerts...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Ai recommendations -->
+        <div class="card">
+            <div class="section-header"><div class="section-icon green">R</div><h4>AI Recommendations</h4></div>
+            <div class="recommendations-grid" id="aiRecommendationList"></div>
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/auth-guard.js"></script>
+<script src="../js/ai-alerts.js"></script>
+<script src="../js/components-loader.js"></script>
+
+</body>
+</html>

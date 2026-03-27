@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NeoMama | Settings</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+        <div id="sidebar"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Top Header -->
+            <div class="top-header">
+
+                <div class="header-left">
+                    <h2>Settings</h2>
+                    <p>Manage your account, notifications, security, and system preferences.</p>
+                </div>
+
+                <div class="header-right">
+
+                    <div class="profile-box">
+                        <img id="headerProfileImg" src="../images/avatar-doctor.png" alt="Doctor">
+                        <div>
+                            <h4 id="headerDoctorName">Doctor</h4>
+                            <span>Medical Professional</span>
+                        </div>
+                    </div>
+
+                    <button class="logout-btn">Logout</button>
+
+                </div>
+
+            </div>
+
+            <!-- Profile Settings -->
+            <section class="settings-card">
+
+                <div class="card-title-row">
+
+                    <h3>Profile Settings</h3>
+
+                    <div class="title-actions">
+                        <button id="editProfileBtn" class="edit-btn">Edit Profile</button>
+                        <span class="card-badge">Account</span>
+                    </div>
+
+                </div>
+
+                <div class="profile-settings-grid">
+
+                    <div class="profile-photo-box">
+                        <img id="profilePreview" src="../images/avatar-doctor.png" alt="Profile Photo">
+                        <input type="file" id="profileImageInput" accept="image/*">
+                        <label for="profileImageInput" class="upload-btn">Change Photo</label>
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="fullName" placeholder="Enter full name">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" placeholder="Enter email address">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <input type="text" id="phone" placeholder="Enter phone number">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Specialization / Role</label>
+                            <input type="text" id="role" placeholder="Enter specialization or role">
+                        </div>
+
+                        <div class="input-group full-width">
+                            <label>Clinic / Hospital Name</label>
+                            <input type="text" id="clinicName" placeholder="Enter clinic or hospital name">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Notification Settings -->
+            <section class="settings-card">
+
+                <div class="card-title-row">
+                    <h3>Notification Settings</h3>
+                    <span class="card-badge">Alerts</span>
+                </div>
+
+                <div class="toggle-grid">
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>AI Risk Alerts</h4>
+                            <p>Receive alerts for high-risk maternal and newborn cases.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="aiAlerts">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>Clinic Visit Reminders</h4>
+                            <p>Get reminders for upcoming clinic visits and missed checkups.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="clinicReminders">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>Email Notifications</h4>
+                            <p>Receive important updates and summaries by email.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="emailNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>SMS Notifications</h4>
+                            <p>Receive urgent reminders and alert messages by SMS.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="smsNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- System Preferences -->
+            <section class="settings-card">
+
+                <div class="card-title-row">
+                    <h3>System Preferences</h3>
+                    <span class="card-badge">Preferences</span>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Language</label>
+                        <select id="language">
+                            <option value="English">English</option>
+                            <option value="Sinhala">Sinhala</option>
+                            <option value="Tamil">Tamil</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Theme</label>
+                        <select id="theme">
+                            <option value="Light">Light</option>
+                            <option value="Dark">Dark</option>
+                            <option value="System Default">System Default</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Time Zone</label>
+                        <select id="timezone">
+                            <option value="Asia/Colombo">Asia/Colombo</option>
+                            <option value="UTC">UTC</option>
+                            <option value="Asia/Kolkata">Asia/Kolkata</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Date Format</label>
+                        <select id="dateFormat">
+                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Security Settings -->
+            <section class="settings-card">
+
+                <div class="card-title-row">
+                    <h3>Security Settings</h3>
+                    <span class="card-badge">Security</span>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password">
+                    </div>
+
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Two-Factor Authentication</label>
+                        <select id="twoFactor">
+                            <option value="Disabled">Disabled</option>
+                            <option value="Enabled">Enabled</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Privacy Settings -->
+            <section class="settings-card">
+
+                <div class="card-title-row">
+                    <h3>Privacy & Access</h3>
+                    <span class="card-badge">Privacy</span>
+                </div>
+
+                <div class="toggle-grid">
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>Show Personal Details</h4>
+                            <p>Allow your personal details to be visible on the dashboard.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="showPersonalDetails">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <div>
+                            <h4>Allow Data Sharing</h4>
+                            <p>Allow system analytics to use non-sensitive clinical data.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="dataSharing">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Actions -->
+            <section class="settings-actions">
+                <button id="saveSettingsBtn" class="primary-btn">Save Settings</button>
+                <button id="resetSettingsBtn" class="secondary-btn">Reset</button>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/components-loader.js"></script>
+
+</body>
+
+</html>

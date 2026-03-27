@@ -1,0 +1,124 @@
+body {
+    background: url("../images/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55);
+    z-index: -1;
+  }
+  
+  .signup-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+  }
+  
+  .signup-card {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  }
+  
+  .signup-left {
+    flex: 1;
+    padding: 80px 60px;
+    color: white;
+    background:
+      linear-gradient(
+        to bottom right,
+        rgba(27, 73, 101, 0.65),
+        rgba(44, 125, 160, 0.45)
+      ),
+      url("../images/doctor-mother.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .signup-right {
+    flex: 1;
+    padding: 50px;
+    background: white;
+  }
+  
+  .brand {
+    color: #2c7da0;
+    font-weight: 700;
+  }
+  
+  .subtitle {
+    margin-bottom: 20px;
+  }
+  
+  .form-section input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .signup-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #2c7da0, #468faf);
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .signup-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-link {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .feature-list {
+    margin-top: 20px;
+    padding-left: 0;
+    list-style: none;
+    font-size: 14px;
+    opacity: 0.95;
+  }
+  
+  .feature-list li {
+    margin-bottom: 8px;
+  }
+  
+  .tagline {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 10px;
+  }
+
+  .midwife-label {
+    background: #eaf4f8;
+    color: #2c7da0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+  }

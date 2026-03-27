@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoMama | Care Team Login</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- Navbar & Footer CSS -->
+    <link rel="stylesheet" href="../components/navbar/navbar.css">
+    <link rel="stylesheet" href="../components/footer/footer.css">
+
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="../css/login.css">
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Login section -->
+    <section class="login-page">
+      <div class="login-wrapper">
+        <div class="login-card">
+
+          <!-- Left -->
+          <div class="login-left">
+            <h2>Welcome Back Care Team</h2>
+
+            <p>
+              Securely access your NeoMama dashboard to manage maternal and infant health records
+              efficiently.
+            </p>
+
+            <p class="trust-badge">✔ Trusted by 120+ Clinics</p>
+
+            <img src="../images/doctor.jpg" alt="Doctor">
+          </div>
+
+          <!-- Right -->
+          <div class="login-right">
+            <h3 class="brand">NeoMama</h3>
+            <p class="subtitle">Secure Doctor & Midwife Access</p>
+
+            <div class="doctor-label">Clinical Team Access</div>
+
+            <form>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your work email">
+              </div>
+
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <small class="error-message" id="passwordError"></small>
+              </div>
+
+              <div class="form-options">
+                <a href="#">Forgot Password?</a>
+              </div>
+
+              <button class="login-btn">Login to Dashboard</button>
+
+              <div class="signup-link mt-3 text-center">
+                Don't have an account?
+                <a href="signup.html">Sign up</a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/login.js"></script>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-body text-center p-4">
+            <h5 class="mb-3">Password Reset</h5>
+            <input type="email" id="resetEmail" class="form-control mb-2" placeholder="Enter your email">
+
+            <input type="password" id="newPassword" class="form-control mb-3" placeholder="New password">
+
+              <button id="resetBtn" class="btn btn-main w-100">
+                Reset Password
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/components-loader.js"></script>
+  </body>
+</html>

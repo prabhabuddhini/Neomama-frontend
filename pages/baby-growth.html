@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoMama | Baby Growth Monitoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/baby-growth.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        <!-- Page header -->
+        <div class="page-header-bar">
+            <div>
+                <h2>Baby Growth Monitoring</h2>
+                <p>Track developmental milestones, vaccinations, and growth progress</p>
+            </div>
+            <div class="header-icon">G</div>
+        </div>
+
+        <!-- Baby selection -->
+        <div class="card selection-card">
+            <div class="section-header">
+                <div class="section-icon select-icon">S</div>
+                <h3>Search and Select Baby</h3>
+            </div>
+            <p class="selection-help">Start typing a baby's name or the mother's name to find a record</p>
+            <div class="searchable-dropdown">
+                <input type="text" id="babySearchInput" class="search-input" placeholder="Search by baby name or mother name..." autocomplete="off">
+                <div id="babyDropdownList" class="dropdown-list"></div>
+            </div>
+        </div>
+
+        <!-- OVERVIEW CARDS (visible when no baby is selected) -->
+        <div id="overviewCards" class="overview-row">
+            <div class="overview-card primary">
+                <span class="overview-label">Total Babies</span>
+                <span class="overview-value" id="overviewBabyCount">0</span>
+            </div>
+            <div class="overview-card">
+                <span class="overview-label">Growth Alerts</span>
+                <span class="overview-value danger" id="overviewAlertCount">0</span>
+            </div>
+            <div class="overview-card">
+                <span class="overview-label">Visits This Month</span>
+                <span class="overview-value brand" id="overviewVisitCount">0</span>
+            </div>
+            <div class="overview-card">
+                <span class="overview-label">Vaccinations Given</span>
+                <span class="overview-value success" id="overviewVaxCount">0</span>
+            </div>
+        </div>
+
+        <!-- TRACKING CONTENT (hidden until baby selected) -->
+        <div id="trackingContent" style="display: none;">
+
+            <!-- Baby profile card -->
+            <div class="card profile-card">
+                <div class="profile-row">
+                    <div class="profile-left">
+                        <div class="profile-avatar" id="avatarLetter">B</div>
+                        <div>
+                            <h3 id="headerBabyName">-</h3>
+                            <p class="profile-sub">Patient ID: <span id="headerPatientId">-</span></p>
+                            <p class="profile-sub">Age: <span id="babyAge">-</span></p>
+                        </div>
+                    </div>
+                    <div class="profile-badges">
+                        <span class="badge badge-info" id="genderBadge">-</span>
+                        <span class="badge badge-neutral" id="bloodBadge">-</span>
+                        <span class="badge" id="riskBadge">-</span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Baby Name</span><span class="info-value" id="infoBabyName">-</span></div>
+                    <div class="info-item"><span class="info-label">Mother Name</span><span class="info-value" id="infoMotherName">-</span></div>
+                    <div class="info-item"><span class="info-label">Date of Birth</span><span class="info-value" id="babyDOB">-</span></div>
+                    <div class="info-item"><span class="info-label">Delivery Type</span><span class="info-value" id="infoDeliveryType">-</span></div>
+                    <div class="info-item"><span class="info-label">Birth Status</span><span class="info-value" id="infoBirthStatus">-</span></div>
+                    <div class="info-item"><span class="info-label">Clinic</span><span class="info-value" id="infoClinic">-</span></div>
+                </div>
+            </div>
+
+            <!-- Birth indicators -->
+            <div class="indicators-row">
+                <div class="indicator-card">
+                    <span class="indicator-label">Birth Weight</span>
+                    <span class="indicator-value" id="weightValue">-</span>
+                </div>
+                <div class="indicator-card">
+                    <span class="indicator-label">Birth Height</span>
+                    <span class="indicator-value" id="heightValue">-</span>
+                </div>
+                <div class="indicator-card">
+                    <span class="indicator-label">Head Circ.</span>
+                    <span class="indicator-value" id="headValue">-</span>
+                </div>
+                <div class="indicator-card">
+                    <span class="indicator-label">BMI</span>
+                    <span class="indicator-value" id="bmiValue">-</span>
+                </div>
+                <div class="indicator-card accent-green">
+                    <span class="indicator-label">Apgar (1 min)</span>
+                    <span class="indicator-value" id="apgar1Value">-</span>
+                </div>
+                <div class="indicator-card accent-green">
+                    <span class="indicator-label">Apgar (5 min)</span>
+                    <span class="indicator-value" id="apgar5Value">-</span>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN: Form + Status -->
+            <div class="two-col">
+                <!-- LEFT: Add Growth Record -->
+                <div class="card form-card">
+                    <div class="section-header">
+                        <div class="section-icon form-icon">+</div>
+                        <h3>Log Growth Visit</h3>
+                    </div>
+                    <div class="form-fields">
+                        <div class="field-row">
+                            <div class="field">
+                                <label>Visit Date</label>
+                                <input type="date" id="recordDate">
+                            </div>
+                            <div class="field">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="recordWeight" step="0.1" placeholder="e.g. 4.5">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label>Height (cm)</label>
+                                <input type="number" id="recordHeight" placeholder="e.g. 55">
+                            </div>
+                            <div class="field">
+                                <label>Head Circumference (cm)</label>
+                                <input type="number" id="recordHead" step="0.1" placeholder="e.g. 37">
+                            </div>
+                        </div>
+                        <!-- Vaccination Section -->
+                        <div class="vax-section">
+                            <div class="vax-section-header">
+                                <label>Vaccinations</label>
+                                <button type="button" class="btn-add-vax" id="addVaccineBtn">+ Add Vaccine</button>
+                            </div>
+                            <div id="vaccineRowsContainer">
+                                <!-- Dynamic vaccine rows will be added here -->
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Doctor Notes</label>
+                            <textarea id="recordNotes" rows="3" placeholder="Clinical observations..."></textarea>
+                        </div>
+                        <button class="btn-save" id="saveGrowthBtn">Save Growth Record</button>
+                    </div>
+                </div>
+
+                <!-- RIGHT: WHO + Risk + Vaccination -->
+                <div class="right-col">
+                    <!-- WHO Comparison -->
+                    <div class="card">
+                        <div class="section-header">
+                            <div class="section-icon who-icon">W</div>
+                            <h3>WHO Growth Comparison</h3>
+                        </div>
+                        <div class="who-grid">
+                            <div class="who-item">
+                                <span class="who-label">WHO Standard</span>
+                                <span class="who-value" id="whoStandardWeight">-</span>
+                            </div>
+                            <div class="who-item">
+                                <span class="who-label">Current Weight</span>
+                                <span class="who-value" id="whoWeightDisplay">-</span>
+                            </div>
+                            <div class="who-item full-width">
+                                <span class="who-label">Status</span>
+                                <span class="who-value" id="whoStatus">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Analysis -->
+                    <div class="card">
+                        <div class="section-header">
+                            <div class="section-icon risk-icon">R</div>
+                            <h3>Growth Risk Analysis</h3>
+                        </div>
+                        <div id="riskStatus" class="risk-box">Select a baby to view risk assessment</div>
+                        <p class="risk-rec" id="riskRecommendation">-</p>
+                    </div>
+
+                    <!-- Vaccination Summary -->
+                    <div class="card">
+                        <div class="section-header">
+                            <div class="section-icon vax-icon">V</div>
+                            <h3>Vaccination Summary</h3>
+                        </div>
+                        <div id="vaccinationSummary" class="vax-list">
+                            <p class="text-muted">No vaccination records yet</p>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Notes -->
+                    <div class="card">
+                        <div class="section-header">
+                            <div class="section-icon notes-icon">N</div>
+                            <h3>Doctor Notes</h3>
+                        </div>
+                        <p id="doctorNotesDisplay" class="notes-text">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth chart -->
+            <div class="card">
+                <div class="section-header">
+                    <div class="section-icon chart-icon">C</div>
+                    <h3>Growth Progress Chart</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Growth history table -->
+            <div class="card">
+                <div class="section-header">
+                    <div class="section-icon history-icon">H</div>
+                    <h3>Growth History</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="growth-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Age</th>
+                                <th>Weight</th>
+                                <th>Height</th>
+                                <th>Head</th>
+                                <th>Vaccine</th>
+                                <th>Notes</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="growthTableBody">
+                            <tr><td colspan="8" class="empty-state">Select a baby to view growth history</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/baby-growth.js"></script>
+    <script src="../js/components-loader.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+/* RESET */
+*{
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
+   }
+   body{
+   background:url("../images/bg.jpg") no-repeat center center fixed;
+   background-size:cover;
+   font-family:'Poppins',sans-serif;
+   font-size: 16px;
+   margin:0;
+   min-height:100vh;
+   display:flex;
+   flex-direction:column;
+   }
+   body::before{
+   content:"";
+   position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+   background:rgba(255,255,255,0.55); /* light glass effect */
+   z-index:-1;
+   }
+   /* ===== LOGIN WRAPPER ===== */
+   .login-page .login-wrapper{
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   padding:60px 20px;
+   }
+   /* ===== MAIN CARD ===== */
+   .login-card{
+   display:flex;
+   max-width:1000px;
+   width:100%;
+   background:rgba(255,255,255,0.15);
+   backdrop-filter:blur(15px);
+   border-radius:20px;
+   overflow:hidden;
+   box-shadow:0 30px 60px rgba(0,0,0,0.25);
+   }
+   /* ===== LEFT SIDE ===== */
+   .login-left{
+   flex:1;
+   padding:60px 50px;
+   color:white;
+   background:
+   linear-gradient(160deg, rgba(27,73,101,0.95), rgba(44,125,160,0.92)),
+   url("../images/bg.jpg");
+   background-size:cover;
+   background-position:center;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center; /* ⭐ ADD THIS - center horizontally */
+   text-align:center; /* ⭐ ADD THIS - center text */
+   border-top-left-radius:20px;
+   border-bottom-left-radius:20px;
+   position:relative;
+   overflow:hidden;
+   }
+   .trust-badge{
+   margin-top:25px;
+   font-size:13px;
+   background:rgba(255,255,255,0.18);
+   display:inline-flex;
+   align-items:center;
+   gap:6px;
+   padding:8px 16px;
+   border-radius:30px;
+   backdrop-filter:blur(8px);
+   box-shadow:0 8px 20px rgba(0,0,0,0.15);
+   width:auto;
+   }
+   .login-left h2{
+   font-weight:700;
+   margin-bottom:20px;
+   }
+   .login-left p{
+   font-size:14px;
+   margin-bottom:30px;
+   opacity:0.9;
+   }
+   .login-left img{
+   display:block;
+   margin:25px auto 0 auto; /* center */
+   width:100%;
+   max-width:320px;
+   border-radius:18px;
+   box-shadow:0 25px 60px rgba(0,0,0,0.45);
+   }
+   .login-left img:hover{
+   transform:scale(1.03);
+   }
+   /* ===== RIGHT SIDE ===== */
+   .login-right{
+   flex:1;
+   padding:60px 50px;
+   background:white;
+   }
+   .brand{
+   color:#2c7da0;
+   font-weight:700;
+   }
+   .subtitle{
+   margin-bottom:25px;
+   color:#666;
+   }
+   /* FORM */
+   .form-group{
+   margin-bottom:20px;
+   }
+   .form-group label{
+   display:block;
+   font-weight:500;
+   margin-bottom:5px;
+   }
+   .form-group input{
+   width:100%;
+   padding:12px;
+   border-radius:8px;
+   border:1px solid #ccc;
+   transition:0.3s;
+   }
+   .form-group input:focus{
+   border-color:#2c7da0;
+   outline:none;
+   box-shadow:0 0 0 3px rgba(44,125,160,0.2);
+   }
+   .form-options{
+   text-align:right;
+   margin-bottom:20px;
+   }
+   .form-options a{
+   font-size:14px;
+   color:#2c7da0;
+   text-decoration:none;
+   }
+   /* LOGIN BUTTON */
+   .login-right .login-btn{
+   width:100%;
+   padding:12px;
+   border:none;
+   border-radius:30px;
+   background:linear-gradient(45deg,#2c7da0,#468faf);
+   color:white;
+   font-weight:600;
+   transition:0.3s;
+   }
+   .login-right .login-btn:hover{
+   background:linear-gradient(45deg,#1f607e,#2c7da0);
+   color:white;
+   transform:translateY(-3px);
+   box-shadow:0 10px 25px rgba(0,0,0,0.25);
+   }
+   /* ===== RESPONSIVE ===== */
+   @media(max-width:900px){
+   .login-card{
+   flex-direction:column;
+   }
+   .login-left{
+   text-align:center;
+   }
+   .login-left img{
+   margin:auto;
+   }
+   }
+   .error-message{
+   color:#d9534f;
+   font-size:13px;
+   margin-top:5px;
+   display:block;
+   }
+   .signup-link{
+   font-size:14px;
+   }
+   .signup-link a{
+   color:#2c7da0;
+   font-weight:600;
+   text-decoration:none;
+   }
+   .signup-link a:hover{
+   text-decoration:underline;
+   }
+
+   .doctor-label{
+      background:#eaf4f8;
+      color:#2c7da0;
+      padding:8px 14px;
+      border-radius:20px;
+      font-size:13px;
+      font-weight:600;
+      display:inline-block;
+      margin-bottom:20px;
+    }
+
+    /* ADD THIS ↓ */
+   .login-right form{
+   margin-top:10px;
+   }

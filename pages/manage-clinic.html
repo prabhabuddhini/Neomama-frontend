@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NeoMama | Manage Clinic</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/manage-clinic.css">
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+    
+    <!-- Main content -->
+    <div class="main-content">
+
+        <!-- Page header -->
+        <div class="page-header-bar">
+            <div>
+                <h2>Clinic Information</h2>
+                <p>Manage government clinic profile, doctor and midwife details, clinic schedule, and available services.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-export" id="printBtn">Print Details</button>
+                <button class="btn-export" style="background: white; color: #1b4965;" id="saveAllBtn">Save Changes</button>
+            </div>
+        </div>
+
+            <!-- Summary -->
+            <section class="summary-cards">
+
+                <div class="summary-card">
+                    <h4>Doctor Count</h4>
+                    <h3>1</h3>
+                </div>
+
+                <div class="summary-card">
+                    <h4>Midwife Count</h4>
+                    <h3>1</h3>
+                </div>
+
+                <div class="summary-card">
+                    <h4>Clinic Days</h4>
+                    <h3>3</h3>
+                </div>
+
+                <div class="summary-card">
+                    <h4>Services</h4>
+                    <h3>5</h3>
+                </div>
+
+            </section>
+
+            <!-- Clinic Profile -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Clinic Profile</h3>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Clinic Name</label>
+                        <input type="text" id="clinicName" value="NeoMama Government Clinic">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Registration Number</label>
+                        <input type="text" id="regNo" value="GOV-DSP-2026-014">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Address</label>
+                        <input type="text" id="address"
+                            value="Colombo Road, Kurunegala, Sri Lanka">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" id="contactNumber" value="+94 71 234 5678">
+                    </div>
+
+                    <div class="form-group">
+                        <label>District / MOH Area</label>
+                        <input type="text" id="mohArea" value="Kurunegala MOH Division">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Staff Details -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Staff Details</h3>
+                </div>
+
+                <div class="staff-grid">
+
+                    <div class="staff-box">
+
+                        <h4>Doctor Details</h4>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Doctor Name</label>
+                                <input type="text" id="doctorName" value="Dr. Nadeesha Silva">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Qualification</label>
+                                <input type="text" id="doctorQualification" value="MBBS">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="text" id="doctorContact" value="+94 77 111 2233">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="doctorEmail"
+                                    value="dr.nadeesha@neomama.com">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="staff-box">
+
+                        <h4>Midwife Details</h4>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Midwife Name</label>
+                                <input type="text" id="midwifeName" value="Ms. Kumari Perera">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Position</label>
+                                <input type="text" id="midwifePosition"
+                                    value="Public Health Midwife">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="text" id="midwifeContact"
+                                    value="+94 71 987 6543">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email (Login)</label>
+                                <input type="email" id="midwifeEmail"
+                                    value="midwife.kumari@neomama.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="midwifePassword" placeholder="Set or update password">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Clinic Schedule -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Clinic Schedule</h3>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Clinic Days</label>
+                        <input type="text" id="clinicDays"
+                            value="Monday, Wednesday, Friday">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Working Hours</label>
+                        <input type="text" id="workingHours"
+                            value="8:00 AM - 4:00 PM">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Maternal Clinic Day</label>
+                        <input type="text" id="maternalClinicDay"
+                            value="Wednesday">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Baby Follow-up Day</label>
+                        <input type="text" id="babyClinicDay"
+                            value="Friday">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Services -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Available Services</h3>
+                </div>
+
+                <div class="check-grid">
+                    <label><input type="checkbox" checked> Maternal Registration</label>
+                    <label><input type="checkbox" checked> Pregnancy Monitoring</label>
+                    <label><input type="checkbox" checked> Baby Growth Monitoring</label>
+                    <label><input type="checkbox" checked> Vaccination Follow-up</label>
+                    <label><input type="checkbox" checked> Nutrition Advice</label>
+                </div>
+
+            </section>
+
+            <!-- Facility Details -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Facility Details</h3>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Consultation Room</label>
+                        <input type="text" id="consultRoom"
+                            value="1 Room Available">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Waiting Area</label>
+                        <input type="text" id="waitingArea"
+                            value="Available">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Medicine Storage</label>
+                        <input type="text" id="medicineStorage"
+                            value="Available">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Baby Checkup Area</label>
+                        <input type="text" id="babyCheckupArea"
+                            value="Available">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Emergency Contact -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Emergency Contact</h3>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Emergency Contact Name</label>
+                        <input type="text" id="emergencyName"
+                            value="District Hospital Hotline">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Emergency Contact Number</label>
+                        <input type="text" id="emergencyNumber"
+                            value="+94 37 222 3344">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Notes -->
+            <section class="content-card">
+
+                <div class="section-title-row">
+                    <h3>Additional Notes</h3>
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label>Instructions / Notes</label>
+
+                    <textarea id="clinicNotes" rows="5">
+This clinic provides basic maternal and newborn care services for the local community.
+Patients requiring advanced treatment are referred to the district hospital.
+</textarea>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/manage-clinic.js"></script>
+
+    <script src="../js/components-loader.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoMama | Reports & Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/reports.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        <!-- Page header -->
+        <div class="page-header-bar">
+            <div>
+                <h2>Reports & Analytics</h2>
+                <p>Comprehensive clinic insights, maternal reports, and baby growth analysis</p>
+            </div>
+            <button class="btn-export" onclick="window.print()">Export PDF</button>
+        </div>
+
+        <!-- Tab navigation -->
+        <div class="tab-bar">
+            <button class="tab active" data-tab="clinic">Clinic Overview</button>
+            <button class="tab" data-tab="mother">Mother Report</button>
+            <button class="tab" data-tab="baby">Baby Report</button>
+        </div>
+
+        <!-- Tab 1: clinic overview -->
+        <div class="tab-content active" id="tab-clinic">
+
+            <!-- Kpi cards -->
+            <div class="kpi-row">
+                <div class="kpi-card primary"><span class="kpi-value" id="kpiMothers">0</span><span class="kpi-label">Total Mothers</span></div>
+                <div class="kpi-card"><span class="kpi-value" id="kpiActive">0</span><span class="kpi-label">Active Pregnancies</span></div>
+                <div class="kpi-card"><span class="kpi-value success" id="kpiDelivered">0</span><span class="kpi-label">Delivered</span></div>
+                <div class="kpi-card"><span class="kpi-value danger" id="kpiHighRisk">0</span><span class="kpi-label">High Risk</span></div>
+                <div class="kpi-card"><span class="kpi-value" id="kpiBabies">0</span><span class="kpi-label">Total Babies</span></div>
+                <div class="kpi-card"><span class="kpi-value warning" id="kpiGrowthAlerts">0</span><span class="kpi-label">Growth Alerts</span></div>
+                <div class="kpi-card"><span class="kpi-value brand" id="kpiVisits">0</span><span class="kpi-label">Visits (Month)</span></div>
+                <div class="kpi-card"><span class="kpi-value success" id="kpiVaxRate">0%</span><span class="kpi-label">Vaccination Rate</span></div>
+            </div>
+
+            <!-- Charts row 1 -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon blue">V</div><h4>Monthly Visit Trend</h4></div>
+                    <canvas id="visitChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon red">R</div><h4>Risk Distribution</h4></div>
+                    <canvas id="riskChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon green">D</div><h4>Delivery Forecast</h4></div>
+                    <canvas id="deliveryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Charts row 2 -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon purple">B</div><h4>Blood Group Distribution</h4></div>
+                    <canvas id="bloodGroupChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon amber">X</div><h4>Vaccination Coverage</h4></div>
+                    <canvas id="vaccineChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header"><div class="chart-icon teal">W</div><h4>Doctor Workload</h4></div>
+                    <canvas id="doctorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- High risk table -->
+            <div class="card">
+                <div class="section-header"><div class="section-icon red">H</div><h4>High Risk Mothers</h4></div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead><tr><th>Name</th><th>Weeks</th><th>BP</th><th>Risk Factors</th><th>Doctor</th></tr></thead>
+                        <tbody id="highRiskTableBody"><tr><td colspan="5" class="empty-state">Loading...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: mother report -->
+        <div class="tab-content" id="tab-mother">
+            <div class="card">
+                <div class="section-header"><div class="section-icon blue">S</div><h4>Search Mother</h4></div>
+                <div class="searchable-dropdown">
+                    <input type="text" id="motherSearchInput" class="search-input" placeholder="Search by mother name..." autocomplete="off">
+                    <div id="motherDropdownList" class="dropdown-list"></div>
+                </div>
+            </div>
+
+            <div id="motherReportContent" style="display:none;">
+                <!-- Profile -->
+                <div class="card">
+                    <div class="profile-row">
+                        <div class="profile-left"><div class="profile-avatar" id="motherAvatar">M</div>
+                            <div><h3 id="motherName">-</h3><p class="profile-sub" id="motherMeta">-</p></div>
+                        </div>
+                        <div class="profile-badges" id="motherBadges"></div>
+                    </div>
+                    <div class="info-grid" id="motherInfoGrid"></div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-row two-col">
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon blue">W</div><h4>Weight Progression</h4></div><canvas id="motherWeightChart"></canvas></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon red">B</div><h4>Blood Pressure Trend</h4></div><canvas id="motherBPChart"></canvas></div>
+                </div>
+                <div class="charts-row two-col">
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon amber">S</div><h4>Sugar Level Tracking</h4></div><canvas id="motherSugarChart"></canvas></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon green">H</div><h4>Hemoglobin Tracking</h4></div><canvas id="motherHbChart"></canvas></div>
+                </div>
+
+                <!-- Visit History -->
+                <div class="card">
+                    <div class="section-header"><div class="section-icon blue">V</div><h4>Visit History</h4></div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead><tr><th>Date</th><th>Weeks</th><th>Weight</th><th>BP</th><th>Sugar</th><th>Hb</th><th>Risk</th><th>Notes</th></tr></thead>
+                            <tbody id="motherVisitTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Linked Baby -->
+                <div class="card" id="linkedBabyCard" style="display:none;">
+                    <div class="section-header"><div class="section-icon green">B</div><h4>Linked Baby Record</h4></div>
+                    <div class="info-grid" id="linkedBabyGrid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: baby report -->
+        <div class="tab-content" id="tab-baby">
+            <div class="card">
+                <div class="section-header"><div class="section-icon green">S</div><h4>Search Baby</h4></div>
+                <div class="searchable-dropdown">
+                    <input type="text" id="babySearchInput" class="search-input" placeholder="Search by baby name or mother name..." autocomplete="off">
+                    <div id="babyDropdownList" class="dropdown-list"></div>
+                </div>
+            </div>
+
+            <div id="babyReportContent" style="display:none;">
+                <!-- Profile -->
+                <div class="card">
+                    <div class="profile-row">
+                        <div class="profile-left"><div class="profile-avatar baby-avatar" id="babyAvatar">B</div>
+                            <div><h3 id="babyName">-</h3><p class="profile-sub" id="babyMeta">-</p></div>
+                        </div>
+                        <div class="profile-badges" id="babyBadges"></div>
+                    </div>
+                    <div class="info-grid" id="babyInfoGrid"></div>
+                </div>
+
+                <!-- Indicators -->
+                <div class="indicators-row" id="babyIndicators"></div>
+
+                <!-- Growth Curves -->
+                <div class="charts-row two-col">
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon blue">W</div><h4>Weight Curve</h4></div><canvas id="babyWeightChart"></canvas></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon green">H</div><h4>Height Curve</h4></div><canvas id="babyHeightChart"></canvas></div>
+                </div>
+                <div class="charts-row two-col">
+                    <div class="chart-card"><div class="chart-header"><div class="chart-icon amber">C</div><h4>Head Circumference</h4></div><canvas id="babyHeadChart"></canvas></div>
+                    <div class="chart-card">
+                        <div class="chart-header"><div class="section-icon amber">V</div><h4>Vaccination Timeline</h4></div>
+                        <div id="babyVaxTimeline" class="vax-timeline"></div>
+                    </div>
+                </div>
+
+                <!-- Growth History -->
+                <div class="card">
+                    <div class="section-header"><div class="section-icon blue">G</div><h4>Growth History</h4></div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead><tr><th>Date</th><th>Age</th><th>Weight</th><th>Height</th><th>Head</th><th>Vaccine</th><th>Notes</th></tr></thead>
+                            <tbody id="babyGrowthTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/reports.js"></script>
+    <script src="../js/components-loader.js"></script>
+
+</body>
+</html>

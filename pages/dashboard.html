@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoMama | Doctor Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <!-- sidebar css add kara -->
+  <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR LOAD (component) -->
+  <div id="sidebar"></div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- Top header -->
+    <div class="top-header">
+      <div class="header-left">
+        <h3 id="greetingText">Doctor Dashboard</h3>
+      </div>
+
+      <div class="header-right">
+        <span class="date" id="todayDate"></span>
+        <span id="liveTime"></span>
+        <span class="notif" id="notifBell" title="Notifications">&#9900;</span>
+
+        <div class="profile">
+          <img id="profileAvatar" src="../images/avatar-doctor.png" alt="Doctor Avatar">
+          <span id="profileName">Doctor</span>
+        </div>
+
+        <button class="logout-btn">Logout</button>
+      </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-hero">
+      <div class="hero-left">
+        <h2 id="welcomeText"></h2>
+
+        <p class="hero-text">
+          Monitor maternal and newborn health with smart digital tracking.
+          Manage patient records easily and receive AI-powered clinical insights.
+        </p>
+
+        <p class="hero-sub">
+          Detect risks early and improve care from your NeoMama dashboard.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="reports.html" class="primary-btn">View Analytics Report</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="../images/ladydoctor.jpg">
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-row">
+
+      <div class="stat-card mothers">
+        <div class="stat-icon"><img src="../images/icon-patients.png" alt="Patients"></div>
+        <div class="stat-title">Registered Patients</div>
+        <div class="stat-number" id="totalPatients">0</div>
+      </div>
+
+      <div class="stat-card babies">
+        <div class="stat-icon"><img src="../images/icon-newborn.png" alt="Newborns"></div>
+        <div class="stat-title">Newborns Under Monitoring</div>
+        <div class="stat-number" id="totalVisits">0</div>
+      </div>
+
+      <div class="stat-card alerts">
+        <div class="stat-icon"><img src="../images/icon-alert.png" alt="Alerts"></div>
+        <div class="stat-title">High-Risk Alerts</div>
+        <div class="stat-number" id="highRiskCount">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><img src="../images/icon-clinic.png" alt="Clinic"></div>
+        <div class="stat-title">Clinic Visits Today</div>
+        <div class="stat-number" id="todayVisits">0</div>
+      </div>
+
+    </div>
+
+    <!-- Modern Features -->
+    <div class="features-grid">
+
+      <div class="feature-card maternal-card">
+        <div class="feature-icon"><img src="../images/icon-maternal.png" alt="Maternal"></div>
+        <h3>Maternal Health Monitoring</h3>
+        <p>
+          Track blood pressure, weight, glycaemic levels and pregnancy progression for registered patients.
+          Identify and flag high-risk pregnancies at the earliest stage.
+        </p>
+      </div>
+
+      <div class="feature-card baby-card">
+        <div class="feature-icon"><img src="../images/icon-growth.png" alt="Growth"></div>
+        <h3>Newborn Growth Monitoring</h3>
+        <p>Assess infant growth against WHO anthropometric standards and detect developmental deviations early.</p>
+      </div>
+
+      <div class="feature-card clinic-card">
+        <div class="feature-icon"><img src="../images/icon-records.png" alt="Records"></div>
+        <h3>Patient Record Management</h3>
+        <p>Maintain and access complete patient records and clinical notes through a secure, structured digital interface.</p>
+      </div>
+
+      <div class="feature-card ai-card">
+        <div class="feature-icon"><img src="../images/icon-ai.png" alt="AI"></div>
+        <h3>AI Clinical Insights</h3>
+        <p>Receive AI-generated clinical recommendations and risk alerts to support informed decision-making.</p>
+      </div>
+
+    </div>
+
+    <!-- Alerts + activity -->
+    <div class="two-column-section">
+
+      <div class="card alert-card">
+        <div class="alert-card-header">
+          <h4>AI Health Alerts</h4>
+          <a href="ai-alerts.html" class="alert-view-link">View all</a>
+        </div>
+        <ul class="alert-list" id="dashboardAlertList">
+          <li class="alert-empty">Loading alerts...</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>Recent Patient Activity</h4>
+        <ul class="timeline">
+          <li><span class="dot"></span> New mother registered</li>
+          <li><span class="dot"></span> Baby growth updated</li>
+          <li><span class="dot"></span> High-risk alert generated</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card quick-actions">
+      <h4>Quick Actions</h4>
+
+      <div class="quick-grid">
+
+        <div class="quick-left">
+          <a href="patients.html">Register New Mother</a>
+          <a href="baby-record.html" class="baby-btn">Add Newborn Record</a>
+          <a href="../pages/reports.html" class="action-btn">View Analytics</a>
+          <a href="ai-assistant.html" class="action-btn">AI Clinical Assistant</a>
+          <a href="manage-clinic.html" class="action-btn">Manage Clinic</a>
+
+        </div>
+
+        <div class="quick-right">
+          <img src="../images/assistant.jpg" alt="assistant">
+          <h3>NeoMama Assistant</h3>
+          <p>
+            Manage maternal and newborn health easily with smart digital tools and AI insights.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card system-overview">
+      <h4>System Overview</h4>
+      <p>
+        NeoMama is a clinical-grade digital health platform designed to support medical professionals in monitoring
+        maternal and neonatal health. It provides structured patient records, real-time risk alerts, and AI-assisted
+        clinical insights within a secure and accessible environment.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/dashboard.js"></script>
+
+    <script src="../js/components-loader.js"></script>
+
+</body>
+</html>

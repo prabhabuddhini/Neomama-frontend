@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoMama | Pregnancy Tracking</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="../css/pregnancy.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <div id="sidebar"></div>
+
+        <div class="main-content">
+            <div class="hero-bg"></div>
+
+    <div class="container mt-4 mb-5">
+
+        <!-- Page header -->
+        <div class="page-header mb-4">
+            <h2>Pregnancy Monitoring & Clinical Tracking</h2>
+            <p class="subtitle">Select a patient below to view and log maternal health records.</p>
+        </div>
+
+        <!-- Mother selection box -->
+        <div class="row text-center mb-4" id="pregnancyOverviewCards">
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm border-0 h-100 d-flex flex-column justify-content-center" style="border-radius: 15px; background: linear-gradient(135deg, #1b4965, #2c7da0); color: white;">
+                    <h5 class="mb-1" style="font-weight: 400; font-size: 1rem;">Active Monitored</h5>
+                    <h2 class="mb-0" id="overviewActiveCount" style="font-weight: 700;">0</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm border-0 h-100 d-flex flex-column justify-content-center" style="border-radius: 15px; background: white;">
+                    <h5 class="mb-1 text-muted" style="font-weight: 400; font-size: 1rem;">High Risk Alerts</h5>
+                    <h2 class="mb-0 text-danger" id="overviewHighRiskCount" style="font-weight: 700;">0</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm border-0 h-100 d-flex flex-column justify-content-center" style="border-radius: 15px; background: white;">
+                    <h5 class="mb-1 text-muted" style="font-weight: 400; font-size: 1rem;">Visits Today</h5>
+                    <h2 class="mb-0" id="overviewTodayCount" style="font-weight: 700; color: #1b4965;">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card selection-box mb-4 p-4 text-center" style="border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: none;">
+            <h5 class="mb-3">Search & Select Patient</h5>
+            <div class="searchable-dropdown mx-auto">
+                <input type="text" id="patientSearchInput" class="form-control" placeholder="Search by name or ID..." autocomplete="off">
+                <div id="patientDropdownList" class="dropdown-list shadow-sm"></div>
+            </div>
+        </div>
+
+        <!-- TRACKING CONTENT (Hidden by default) -->
+        <div id="trackingContent" style="display: none;">
+
+            <!-- Header actions -->
+            <div class="d-flex justify-content-end mb-3 header-btns">
+                <button id="addVisitBtn" class="btn btn-main">➕ Add Visit</button>
+                <button id="fullHistoryBtn" class="btn btn-outline">📄 View History</button>
+                <a href="patients.html" class="btn btn-outline">🔙 Back</a>
+            </div>
+
+            <!-- Summary card -->
+            <div class="card summary-card mb-4 p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="../images/avatar-mother.png" class="profile-img" id="summaryPhoto">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h4 id="motherName" class="mb-1" style="color: #1b4965; font-weight: 600;">Loading...</h4>
+                                <span id="motherStatus" class="status-badge normal">Under Monitoring</span>
+                            </div>
+                            <span id="riskBadge" class="risk-badge normal">Normal Risk</span>
+                        </div>
+                        
+                        <div class="summary-grid mt-3">
+                            <div class="summary-item"><span>Age</span><b id="motherAge">-</b></div>
+                            <div class="summary-item"><span>Blood Group</span><b id="motherBlood">-</b></div>
+                            <div class="summary-item"><span>Weeks</span><b id="motherWeeks">-</b></div>
+                            <div class="summary-item"><span>EDD</span><b id="motherEDD">-</b></div>
+                            <div class="summary-item"><span>Doctor</span><b id="motherDoctor">-</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregnancy progress -->
+            <div class="card mb-4 p-4">
+                <h5 class="section-title">Gestation Progress</h5>
+                <p class="pregnancy-week-text text-muted mb-2"></p>
+                <div class="progress custom-progress">
+                    <div class="progress-bar" id="pregnancyProgress">0%</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Left column: add visit -->
+                <div class="col-md-5">
+                    <div id="visitForm" class="card p-4 mb-4">
+                        <h5 class="section-title">Log Clinic Visit</h5>
+                    
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label>Visit Date</label>
+                                <input id="visitDate" class="form-control" type="date">
+                            </div>
+                            <div class="col-6">
+                                <label>Gestational Week</label>
+                                <input id="visitWeeks" type="number" class="form-control" placeholder="e.g. 12" min="1" max="42">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label>Weight (kg)</label>
+                                <input id="visitWeight" type="number" class="form-control" placeholder="0.0">
+                            </div>
+                            <div class="col-6">
+                                <label>Blood Pressure</label>
+                                <input id="visitBP" type="text" class="form-control" placeholder="120/80">
+                            </div>
+                        </div>
+                    
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label>Sugar Level</label>
+                                <select id="visitSugar" class="form-select" aria-label="Sugar Level">
+                                    <option value="Normal" selected>Normal</option>
+                                    <option value="Low">Low</option>
+                                    <option value="High">High</option>
+                                    <option value="Not Tested">Not Tested</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label>Hemoglobin</label>
+                                <input id="visitHb" type="text" class="form-control" placeholder="12.0">
+                            </div>
+                        </div>
+                    
+                        <div class="form-group mb-3">
+                            <label>Clinical Notes</label>
+                            <textarea id="visitNotes" class="form-control" rows="3" placeholder="Enter findings..."></textarea>
+                        </div>
+                    
+                        <div class="form-group mb-4">
+                            <label>Next Scheduled Visit</label>
+                            <input id="visitNext" class="form-control" type="date">
+                        </div>
+                    
+                        <button id="saveVisitBtn" class="btn btn-main w-100 py-2">Save Record</button>
+                    </div>
+                </div>
+
+                <!-- Right column: indicators & insights -->
+                <div class="col-md-7">
+                    
+                    <div class="card p-4 mb-4">
+                        <h5 class="section-title">Current Health Status</h5>
+                        <div class="indicators-grid">
+                            <div class="indicator-box" id="latestWeightBox">
+                                <span class="label">Weight</span>
+                                <h4 id="latestWeight">-</h4>
+                            </div>
+                            <div class="indicator-box" id="latestBPBox">
+                                <span class="label">Blood Pressure</span>
+                                <h4 id="latestBP">-</h4>
+                            </div>
+                            <div class="indicator-box" id="latestSugarBox">
+                                <span class="label">Sugar Level</span>
+                                <h4 id="latestSugar">-</h4>
+                            </div>
+                            <div class="indicator-box" id="latestHbBox">
+                                <span class="label">Hemoglobin</span>
+                                <h4 id="hbBox">-</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 mb-4">
+                        <h5 class="section-title">Clinical Insights</h5>
+                        <div id="clinicalInsightsBox" class="insights-box">
+                            <p class="text-muted">Loading insights based on recent visits...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Visit history -->
+            <div id="historySection" class="card p-4 mt-2" style="display: none;">
+                <h5 id="historyTitle" class="section-title">Clinical History</h5>
+                <div class="table-responsive">
+                    <table class="table custom-table mt-3">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Weight</th>
+                                <th>BP</th>
+                                <th>Sugar</th>
+                                <th>Hb</th>
+                                <th>Risk Level</th>
+                                <th>Next Visit</th>
+                                <th>Notes</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/pregnancy.js"></script>
+    <script src="../js/components-loader.js"></script>
+
+    </div> <!-- END dashboard-layout -->
+
+</body>
+
+</html>
