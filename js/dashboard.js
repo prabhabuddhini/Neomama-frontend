@@ -49,26 +49,32 @@ else {
   greeting = "Good Evening";
 }
 
+const role = localStorage.getItem("role") || "";
+const isMidwife = role.toLowerCase() === "midwife";
+
 const greetElement = document.getElementById("greetingText");
 
 if (greetElement) {
-  greetElement.innerHTML = greeting + " — Doctor Dashboard";
+  const dashType = isMidwife ? "Midwife Dashboard" : "Doctor Dashboard";
+  greetElement.innerHTML = greeting + " — " + dashType;
 }
 
-// DOCTOR PROFILE — name & avatar
+// PROFILE — name & avatar
 const rawName    = localStorage.getItem("doctorName") || "";
-const doctorName = rawName.trim() || "Doctor";
+const doctorName = rawName.trim() || (isMidwife ? "Midwife" : "Doctor");
+
+const namePrefix = isMidwife ? "" : "Dr. ";
 
 // Header profile name (initial from localStorage)
 const profileNameEl = document.getElementById("profileName");
 if (profileNameEl) {
-  profileNameEl.textContent = "Dr. " + doctorName;
+  profileNameEl.textContent = namePrefix + doctorName;
 }
 
 // Hero welcome text (initial from localStorage)
 const welcomeEl = document.getElementById("welcomeText");
 if (welcomeEl) {
-  welcomeEl.textContent = "Welcome back, Dr. " + doctorName + ".";
+  welcomeEl.textContent = "Welcome back, " + namePrefix + doctorName + ".";
 }
 
 // Fetch fresh profile data to get the profile picture
@@ -79,8 +85,8 @@ fetch("http://localhost:5001/api/Auth/profile", {
   .then(data => {
     // Update name
     if (data.name) {
-      if (profileNameEl) profileNameEl.textContent = "Dr. " + data.name;
-      if (welcomeEl) welcomeEl.textContent = "Welcome back, Dr. " + data.name + ".";
+      if (profileNameEl) profileNameEl.textContent = namePrefix + data.name;
+      if (welcomeEl) welcomeEl.textContent = "Welcome back, " + namePrefix + data.name + ".";
       localStorage.setItem("doctorName", data.name);
     }
     
@@ -90,7 +96,8 @@ fetch("http://localhost:5001/api/Auth/profile", {
       if (data.profileImage && data.profileImage.length > 10) {
         profileAvatar.src = data.profileImage;
       } else {
-        profileAvatar.src = "../images/avatar-doctor.png";
+        const defaultAvatar = isMidwife ? "../images/avatar-mother.png" : "../images/avatar-doctor.png";
+        profileAvatar.src = defaultAvatar;
       }
     }
   })

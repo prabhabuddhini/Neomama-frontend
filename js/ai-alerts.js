@@ -143,42 +143,159 @@ function renderRecommendations(filtered) {
 
 // Charts
 function renderCharts() {
-    // Severity doughnut
+    // Severity Donut
     const critCount = allAlerts.filter(a => sev(a) === "critical").length;
     const modCount = allAlerts.filter(a => sev(a) === "moderate").length;
     const lowCount = allAlerts.filter(a => sev(a) === "low").length;
 
-    new Chart(document.getElementById("severityChart"), {
-        type: "doughnut",
-        data: {
-            labels: ["Critical", "Moderate", "Low"],
-            datasets: [{ data: [critCount, modCount, lowCount], backgroundColor: ["#dc2626", "#d97706", "#0284c7"], borderWidth: 0 }]
+    const severityOptions = {
+        series: [critCount, modCount, lowCount],
+        chart: {
+            type: 'donut',
+            height: 280,
+            fontFamily: 'Poppins, sans-serif'
         },
-        options: { responsive: true, plugins: { legend: { position: "bottom", labels: { usePointStyle: true, font: { family: "'Poppins'", size: 11 } } } }, cutout: "65%" }
-    });
+        labels: ["Critical", "Moderate", "Low"],
+        colors: ["#dc2626", "#d97706", "#0284c7"],
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: '70%',
+                    labels: {
+                        show: true,
+                        total: {
+                            show: true,
+                            label: 'Total',
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            color: '#64748b'
+                        }
+                    }
+                }
+            }
+        },
+        legend: {
+            position: 'bottom',
+            fontSize: '12px'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: false
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    height: 240
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
 
-    // Type distribution bar
+    const severityChart = new ApexCharts(document.querySelector("#severityChart"), severityOptions);
+    severityChart.render();
+
+    // Type distribution vertical bar
     const typeCounts = {};
     allAlerts.forEach(a => { typeCounts[a.alertType] = (typeCounts[a.alertType] || 0) + 1; });
     const typeLabels = Object.keys(typeCounts);
     const typeData = Object.values(typeCounts);
-    const typeColors = ["#1b4965", "#2c7da0", "#16a34a", "#d97706", "#dc2626", "#7c3aed", "#db2777", "#64748b"];
 
-    new Chart(document.getElementById("typeChart"), {
-        type: "bar",
-        data: {
-            labels: typeLabels,
-            datasets: [{ label: "Count", data: typeData, backgroundColor: typeColors.slice(0, typeLabels.length), borderRadius: 6, barThickness: 22 }]
-        },
-        options: {
-            responsive: true, indexAxis: "y",
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { beginAtZero: true, grid: { color: "rgba(0,0,0,0.04)" }, ticks: { font: { family: "'Poppins'", size: 10 } } },
-                y: { grid: { display: false }, ticks: { font: { family: "'Poppins'", size: 10 } } }
+    const typeOptions = {
+        series: [{
+            name: 'Alerts',
+            data: typeData
+        }],
+        chart: {
+            type: 'bar',
+            height: 320,
+            fontFamily: 'Poppins, sans-serif',
+            toolbar: {
+                show: false
             }
-        }
-    });
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 4,
+                columnWidth: '45%',
+                distributed: true,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        colors: ["#1b4965", "#2c7da0", "#16a34a", "#d97706", "#dc2626", "#7c3aed", "#db2777", "#64748b"],
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val;
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '11px',
+                colors: ["#64748b"]
+            }
+        },
+        legend: {
+            show: false
+        },
+        xaxis: {
+            categories: typeLabels,
+            labels: {
+                rotate: -45,
+                rotateAlways: false,
+                hideOverlappingLabels: true,
+                style: {
+                    fontSize: '10px',
+                    fontWeight: 400
+                },
+                trim: true,
+                maxHeight: 100
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    fontSize: '10px'
+                }
+            }
+        },
+        grid: {
+            borderColor: '#f1f5f9',
+            strokeDashArray: 4
+        },
+        tooltip: {
+            theme: 'light'
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    height: 300
+                },
+                xaxis: {
+                    labels: {
+                        rotate: -45,
+                        fontSize: '9px'
+                    }
+                }
+            }
+        }]
+    };
+
+    const typeChart = new ApexCharts(document.querySelector("#typeChart"), typeOptions);
+    typeChart.render();
 }
 
 // Export

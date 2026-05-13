@@ -2,6 +2,68 @@
 (function initFeedbackUI() {
   if (window.NeoMamaUI) return;
 
+  // PRELOADER INJECTION =====
+  const preloaderHTML = `
+    <div id="nm-preloader">
+      <div class="preloader-content">
+        <div id="lottie-container"></div>
+        <div class="preloader-text">NeoMama is preparing</div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('afterbegin', preloaderHTML);
+
+  // Load Preloader CSS
+  const preloaderCSS = document.createElement("link");
+  const isInsidePages = window.location.pathname.includes("/pages/");
+  const basePath = isInsidePages ? "../" : "";
+  preloaderCSS.rel = "stylesheet";
+  preloaderCSS.href = `${basePath}css/preloader.css`;
+  document.head.appendChild(preloaderCSS);
+
+  // Load Lottie Library
+  const lottieScript = document.createElement("script");
+  lottieScript.src = "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js";
+  document.head.appendChild(lottieScript);
+
+  lottieScript.onload = () => {
+    lottie.loadAnimation({
+      container: document.getElementById('lottie-container'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: `${basePath}assets/preloader.json`
+    });
+  };
+
+  // Preloader Management
+  let componentsToLoad = 0;
+  let componentsLoaded = 0;
+  let minTimeElapsed = false;
+
+  const checkAllLoaded = () => {
+    if (componentsLoaded >= componentsToLoad && minTimeElapsed) {
+      const preloader = document.getElementById("nm-preloader");
+      if (preloader) {
+        preloader.classList.add("fade-out");
+        setTimeout(() => preloader.remove(), 600);
+      }
+    }
+  };
+
+  setTimeout(() => {
+    minTimeElapsed = true;
+    checkAllLoaded();
+  }, 3000);
+
+  window.trackComponentLoad = () => {
+    componentsToLoad++;
+    return () => {
+      componentsLoaded++;
+      checkAllLoaded();
+    };
+  };
+
   const styles = document.createElement("style");
   styles.textContent = `
     .nm-toast-stack {
@@ -478,31 +540,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (navbarContainer) {
+    const done = window.trackComponentLoad();
     fetch(`${basePath}components/navbar/navbar.html`)
         .then(response => response.text())
         .then(data => {
             navbarContainer.innerHTML = data;
             setCommonLinks();
             setNavbarAuthState();
-
+            done();
         })
-        .catch(error => console.error("Navbar load error:", error));
+        .catch(error => {
+            console.error("Navbar load error:", error);
+            done();
+        });
 }
 
   if (footerContainer) {
+      const done = window.trackComponentLoad();
       fetch(`${basePath}components/footer/footer.html`)
           .then(response => response.text())
           .then(data => {
               footerContainer.innerHTML = data;
               setCommonLinks();
+              done();
           })
-          .catch(error => console.error("Footer load error:", error));
+          .catch(error => {
+              console.error("Footer load error:", error);
+              done();
+          });
   }
 
 // Sidebar load
 const sidebarContainer = document.getElementById("sidebar");
 
 if (sidebarContainer) {
+    const done = window.trackComponentLoad();
     fetch(`${basePath}components/sidebar/sidebar.html`)
         .then(response => response.text())
         .then(data => {
@@ -552,8 +624,12 @@ if (sidebarContainer) {
                     link.parentElement.classList.add("active");
                 }
             });
+            done();
         })
-        .catch(error => console.error("Sidebar load error:", error));
+        .catch(error => {
+            console.error("Sidebar load error:", error);
+            done();
+        });
 
     // Load chat widget on all dashboard pages
     loadChatWidget(basePath);
@@ -563,6 +639,7 @@ if (sidebarContainer) {
 
 // Chat widget loader =====
 function loadChatWidget(basePath) {
+    const done = window.trackComponentLoad ? window.trackComponentLoad() : () => {};
     // Load CSS
     const link = document.createElement("link");
     link.rel = "stylesheet";
@@ -577,7 +654,11 @@ function loadChatWidget(basePath) {
             // Load JS after HTML is injected
             const script = document.createElement("script");
             script.src = `${basePath}components/chat/chat.js`;
+            script.onload = () => done();
             document.body.appendChild(script);
         })
-        .catch(err => console.warn("Chat widget load error:", err));
+        .catch(err => {
+            console.warn("Chat widget load error:", err);
+            done();
+        });
 }

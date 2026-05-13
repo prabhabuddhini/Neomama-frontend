@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../components/sidebar/sidebar.css">
     <link rel="stylesheet" href="../css/ai-alerts.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body>
 
@@ -73,12 +73,18 @@
         <!-- Charts -->
         <div class="charts-row">
             <div class="chart-card">
-                <div class="chart-header"><div class="chart-icon red">S</div><h4>Severity Breakdown</h4></div>
-                <canvas id="severityChart"></canvas>
+                <div class="chart-header">
+                    <div class="chart-icon red">S</div>
+                    <h4>Severity Breakdown</h4>
+                </div>
+                <div id="severityChart"></div>
             </div>
             <div class="chart-card">
-                <div class="chart-header"><div class="chart-icon blue">T</div><h4>Alert Type Distribution</h4></div>
-                <canvas id="typeChart"></canvas>
+                <div class="chart-header">
+                    <div class="chart-icon blue">T</div>
+                    <h4>Alert Type Distribution</h4>
+                </div>
+                <div id="typeChart"></div>
             </div>
         </div>
 
