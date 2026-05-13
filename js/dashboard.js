@@ -235,8 +235,88 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   loadDashboardAlerts();
+  loadRecentActivities();
 
 });
+
+// Recent Patient Activity — live dashboard widget
+function loadRecentActivities() {
+  const list = document.getElementById("recentActivityList");
+  if (!list) return;
+
+  fetch("http://localhost:5001/api/dashboard/activities", {
+    headers: getAuthHeaders()
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Activities API error: " + res.status);
+      return res.json();
+    })
+    .then(activities => {
+      renderRecentActivities(Array.isArray(activities) ? activities : []);
+    })
+    .catch(err => {
+      console.error("Dashboard activities API error:", err);
+      renderRecentActivityState("Unable to load activities");
+    });
+}
+
+function renderRecentActivities(activities) {
+  const list = document.getElementById("recentActivityList");
+  if (!list) return;
+
+  if (!activities.length) {
+    renderRecentActivityState("No recent activities");
+    return;
+  }
+
+  list.innerHTML = "";
+
+  activities.forEach(activity => {
+    const item = document.createElement("li");
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    
+    const text = document.createTextNode(activity.message || "Unknown activity");
+    
+    // Optional: Add timestamp
+    const timeSpan = document.createElement("small");
+    timeSpan.style.display = "block";
+    timeSpan.style.color = "#888";
+    timeSpan.style.fontSize = "0.75rem";
+    timeSpan.textContent = formatActivityTime(activity.timestamp);
+
+    item.appendChild(dot);
+    item.appendChild(text);
+    item.appendChild(timeSpan);
+    list.appendChild(item);
+  });
+}
+
+function renderRecentActivityState(message) {
+  const list = document.getElementById("recentActivityList");
+  if (!list) return;
+
+  list.innerHTML = "";
+  const item = document.createElement("li");
+  item.textContent = message;
+  list.appendChild(item);
+}
+
+function formatActivityTime(timestamp) {
+  if (!timestamp) return "";
+  const date = new Date(timestamp);
+  const now = new Date();
+  const diffInMs = now - date;
+  const diffInMins = Math.floor(diffInMs / (1000 * 60));
+  
+  if (diffInMins < 1) return "Just now";
+  if (diffInMins < 60) return `${diffInMins}m ago`;
+  
+  const diffInHours = Math.floor(diffInMins / 60);
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  
+  return date.toLocaleDateString();
+}
 
 // Ai health alerts — live dashboard widget
 function loadDashboardAlerts() {
