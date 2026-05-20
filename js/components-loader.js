@@ -2,24 +2,9 @@
 (function initFeedbackUI() {
   if (window.NeoMamaUI) return;
 
-  // PRELOADER INJECTION =====
-  const preloaderHTML = `
-    <div id="nm-preloader">
-      <div class="preloader-content">
-        <div id="lottie-container"></div>
-        <div class="preloader-text">NeoMama is preparing</div>
-      </div>
-    </div>
-  `;
-  document.body.insertAdjacentHTML('afterbegin', preloaderHTML);
-
-  // Load Preloader CSS
-  const preloaderCSS = document.createElement("link");
+  // PRELOADER SETUP =====
   const isInsidePages = window.location.pathname.includes("/pages/");
   const basePath = isInsidePages ? "../" : "";
-  preloaderCSS.rel = "stylesheet";
-  preloaderCSS.href = `${basePath}css/preloader.css`;
-  document.head.appendChild(preloaderCSS);
 
   // Load Lottie Library
   const lottieScript = document.createElement("script");
@@ -449,10 +434,10 @@ document.addEventListener("DOMContentLoaded", () => {
           about: `${basePath}index.html#about`,
           features: `${basePath}index.html#features`,
           "how-it-works": `${basePath}index.html#how-it-works`,
-          contact: `${basePath}index.html#contact`,
-          faq: `${basePath}index.html#faq`,
-          privacy: `${basePath}index.html#privacy`,
-          terms: `${basePath}index.html#terms`,
+          contact: `${basePath}pages/contact.html`,
+          faq: `${basePath}pages/faq.html`,
+          privacy: `${basePath}pages/privacy.html`,
+          terms: `${basePath}pages/terms.html`,
           login: `${basePath}pages/login.html`
       };
 
